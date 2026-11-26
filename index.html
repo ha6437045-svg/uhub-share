@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>فتح المنشور في U_Hub</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f4f7fb;
+      color: #1a2433;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 28px 22px;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 8px 24px rgba(15, 76, 168, 0.08);
+    }
+    h1 {
+      color: #0d6efd;
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+    p {
+      color: #556274;
+      margin: 0 0 22px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .btn {
+      display: inline-block;
+      background: #0d6efd;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 13px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>U_Hub</h1>
+    <p id="status">جاري فتح المنشور داخل تطبيق U_Hub...</p>
+    <a id="openBtn" class="btn" href="#">فتح في التطبيق</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('post');
+
+    if (postId) {
+      const deepLink = `uhub://posts/${encodeURIComponent(postId)}`;
+      const btn = document.getElementById('openBtn');
+      btn.href = deepLink;
+
+      // تحويل تلقائي للتطبيق فور فتح الرابط
+      window.location.href = deepLink;
+    } else {
+      document.getElementById('status').textContent = 'رابط المنشور غير مكتمل.';
+      document.getElementById('openBtn').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
